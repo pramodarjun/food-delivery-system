@@ -1,0 +1,27 @@
+{
+  "family": "delivery-service",
+  "networkMode": "bridge",
+  "requiresCompatibilities": ["EC2"],
+  "containerDefinitions": [
+    {
+      "name": "delivery-service",
+      "image": "397562347081.dkr.ecr.us-east-1.amazonaws.com/delivery-service:latest",
+      "memory": 512,
+      "cpu": 256,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8081,
+          "hostPort": 8081,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "SPRING_KAFKA_BOOTSTRAP_SERVERS", "value": "kafka:9092" },
+        { "name": "SPRING_DATASOURCE_URL", "value": "jdbc:postgresql://postgres:5432/expense_db" },
+        { "name": "SPRING_DATASOURCE_USERNAME", "value": "postgres" },
+        { "name": "SPRING_DATASOURCE_PASSWORD", "value": "admin" }
+      ]
+    }
+  ]
+}
